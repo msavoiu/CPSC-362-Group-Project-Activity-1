@@ -8,11 +8,17 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 ### User requirements
 ### Use case:
 **ID**: Shop username and password
+
 **Name**: Shopping for basics
+
 **Description**: Shoppers have a selection of a variety of minimal, simple clothing including shirts, pants, jackets, and accessories to shop from to fit their style
+
 **Primary Actor:** Casual clothing consumers
+
 **Preconditions**: Shoppers taken to the front page of the store
+
 **Postconditions**: Shoppers have a timeless, elevated closet
+
 **Main success scenario**: 
 1. Shoppers sign into their account or can use a guest account to purchase.
 2. Front page displays different articles of clothing to choose from and allows users to sort by category.
