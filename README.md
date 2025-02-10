@@ -6,7 +6,7 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 ## Requirements
 
 ### User requirements
-### Use case:
+#### Use case:
 **ID**: Shop username and password
 
 **Name**: Shopping for basics
