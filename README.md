@@ -40,3 +40,5 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 - Encryption of sensitive customer data
 - Secure payment processing (through a third-party service like Stripe)
 - Convenient checkout options (Paypal, Apple Pay, etc.)
+  
+![Diagramming](https://github.com/msavoiu/CPSC-362-Group-Project-Activity-1/blob/09ccb42f5b07b26ddc2258c5af26541856db8f3b/fds.drawio.png)
