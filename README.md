@@ -31,7 +31,15 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 - Secure Checkout 
 - Live cart updates
 - Up-to-date inventory information (Color/size availability)
-- Account information for tracking orders
+
+| ID: | xxx |
+| ------------- |:-------------:|
+| Name: | View and track purchases |
+| Description: | Customer accesses their account page and is able to view orders placed. They can select an individual order to check its details and shipping status. |
+| Primary Actor: | Customer |
+| Preconditions: | Customer is logged into the system |
+| Postconditions: | Customer is updated on their orders' shipping statuses |
+| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer clicks account icon from any page on the website.<br>2. System displays account dashboard listing all orders placed by the customer.<br>3. Customer selects a specific order to view it in more detail.<br>4. System displays selected order's information: date placed, total, payment method, and items purchased.<br>5. Student clicks the "Track" button.<br>6. System displays shipment tracking information from the carrier. |
 - Categorization by clothing type / style
 
 ### Non-functional requirements
