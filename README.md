@@ -28,9 +28,44 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 6. Shoppers input their payment information and shipping method, then purchase.
 
 ### Functional requirements
-- Secure Checkout 
-- Live cart updates
-- Up-to-date inventory information (Color/size availability)
+__Checkout__
+* Secure checkout system that shows order summary and allows user to see total cost and place order
+
+| Story Card    |           |
+| -------------     |:---------:|
+| Story ID: |1|
+| Story Name: | Checkout Page|
+| User: |  Actor   |
+| Story Description: |A secure checkout system that shows the users order summary and allows them to see the total cost of their items as well as place the order. |
+
+
+__Cart__
+* Live updating cart that reflects number of items the user has added and shows summary of items / price of all items in cart combined
+
+
+| Story Card    |           |
+| ------------- |:---------:|
+| Story ID:    |2|
+| Story Name:      | Cart |
+|User:         | Actor   |
+| Story Description:     | A live updating cart that reflects the number of items the user has added and shows the summary of the items as well as the total price. |
+
+
+__Inventory Information__
+* Up-to-date inventory information for all offered products, this includes color and size availability 
+
+| Story Card    |           |
+| ------------- |:---------:|
+| Story ID:    |3|
+| Story Name:      | Inventory |
+|User:         | Actor   |
+| Story Description:     | An inventory system that shows availability of colors and sizes for different products. |
+
+
+__Account information for tracking orders__
+
+__Categorization by clothing type / style__
+
 
 | ID: | xxx |
 | ------------- |:-------------:|
