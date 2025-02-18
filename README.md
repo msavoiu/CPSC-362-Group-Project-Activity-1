@@ -40,7 +40,18 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Preconditions: | Customer is logged into the system |
 | Postconditions: | Customer is updated on their orders' shipping statuses |
 | Main Success Scenario:<br><br>(Normal Flow) | 1. Customer clicks account icon from any page on the website.<br>2. System displays account dashboard listing all orders placed by the customer.<br>3. Customer selects a specific order to view it in more detail.<br>4. System displays selected order's information: date placed, total, payment method, and items purchased.<br>5. Student clicks the "Track" button.<br>6. System displays shipment tracking information from the carrier. |
-- Categorization by clothing type / style
+
+
+| ID:  | xxx |
+| ------------- |:-------------:|
+| Name:      | Apparel type/style categories     |
+| Description:      | Customer can view various clothing types and styles through a dropdown-style navigation bar at the top of each page on the website, and select specific categories to view their catalogs. |
+| Primary Actor:      | Customer     |
+| Preconditions: | Customer has accessed the website |
+| Postconditions: | Customer has viewed specific Vital products they are interested in |
+| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer hovers over the "Apparel" section of the navigation bar. <br> 2. System displays in a dropdown menu idsplaying the different types (e.g. tops, pants, denim, accessories) and styles (e.g. casual, business-casual, athleisure) of clothing Vital sells. <br> 3. Customer selects a specific category to view. <br> 4. System displays the category's corresponding catalog, from which customers can select specific items to view in more detail. |
+
+
 
 ### Non-functional requirements
 - Desktop and mobile-friendly UI
