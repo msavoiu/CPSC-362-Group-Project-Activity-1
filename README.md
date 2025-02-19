@@ -1,7 +1,7 @@
 # Vital
 
 ## Product vision
-Vital is a online fashion brand for the everyday consumer. For those who aren’t willing to spend the heavy costs that come with the latest fashions and trends, Vital offers timeless basics which can be mixed and matched to elevate any closet. Unlike competitors like Uniqlo, Vital offers more competitive pricing for our apparel. Consumers can enjoy regular deals and sales on products that still use the same high-quality materials as other brands.
+Vital is a online fashion brand for the everyday consumer. For those who aren’t willing to spend the heavy costs that come with the latest fashions and trends, Vital offers timeless basics which can be mixed and matched to elevate any closet. Unlike competitors like Uniqlo, Vital offers more competitive pricing for our apparel. Consumers can enjoy regular deals and sales on products use the same high-quality materials as these other brands.
 
 ## Requirements
 
@@ -9,6 +9,7 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 - Website has core product viewing, add-to-cart, and checkout functionalities
 - Customers create accounts to keep track of items in their cart, view previous orders, and track shipments
 - Convenient options for payment are provided for customers
+- Customers can visit the website from both their computers/laptops and smartphones
 
 ### Functional requirements
 | ID:  | FR001 |
@@ -65,7 +66,7 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Postconditions: | Customer is viewing products they're interested in purchasing |
 | Main Success Scenario:<br><br>(Normal Flow) | 1. Customer clicks the search button from the navigation bar. <br> 2. Customer searches for products they're interested in by providing keywords <br> 3. System displays products tagged with at least one of the provided keywords. |
 
-| ID: | FR008 |
+| ID: | Fr008 |
 | ------------- |:-------------:|
 | Name: | View and track purchases |
 | Description: | Customer accesses their account page and is able to view orders placed. They can select an individual order to check its details and shipping status. |
@@ -74,7 +75,6 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Postconditions: | Customer is updated on their orders' shipping statuses |
 | Main Success Scenario:<br><br>(Normal Flow) | 1. Customer clicks account icon from any page on the website.<br>2. System displays account dashboard listing all orders placed by the customer.<br>3. Customer selects a specific order to view it in more detail.<br>4. System displays selected order's information: date placed, total, payment method, and items purchased.<br>5. Student clicks the "Track" button.<br>6. System displays shipment tracking information from the carrier. |
 
-
 | ID:  | FR009 |
 | ------------- |:-------------:|
 | Name:      | Apparel type/style categories     |
@@ -82,15 +82,45 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Primary Actor:      | Customer     |
 | Preconditions: | Customer has accessed the website |
 | Postconditions: | Customer has viewed specific Vital products they are interested in |
-| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer hovers over the "Apparel" section of the navigation bar. <br> 2. System displays in a dropdown menu idsplaying the different types (e.g. tops, pants, denim, accessories) and styles (e.g. casual, business-casual, athleisure) of clothing Vital sells. <br> 3. Customer selects a specific category to view. <br> 4. System displays the category's corresponding catalog, from which customers can select specific items to view in more detail. |
+| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer hovers over the payme"Apparel" section of the navigation bar. <br> 2. System displays in a dropdown menu idsplaying the different types (e.g. tops, pants, denim, accessories) and styles (e.g. casual, business-casual, athleisure) of clothing Vital sells. <br> 3. Customer selects a specific category to view. <br> 4. System displays the category's corresponding catalog, from which customers can select specific items to view in more detail. |
 
-
+| ID:  | FR010 |
+| ------------- |:-------------:|
+| Name:      | Secure payment processing |
+| Description:      | Orders placed by customers are handled by a third-party financial service like Stripe. |
+| Primary Actor:      | System  |
+| Preconditions: | Customer has placed an order |
+| Postconditions: | Customer's order has been securely processed and confirmed |
+| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer clicks "Place order" to send their order to the system. <br> 2. System sends requests to the payment API to process the order. <br> 3. API responds back indicating whether the payment was successful or not. <br> 4. System displays the appropriate response message for the customer, either indicating that the payment was successful or prompting them to try again/try a different payment method, etc. |
 
 ### Non-functional requirements
-- Desktop and mobile-friendly UI
-- Clothing models with body measurements for customer reference 
-- Encryption of sensitive customer data
-- Secure payment processing (through a third-party service like Stripe)
 - Convenient checkout options (Paypal, Apple Pay, etc.)
+
+| ID:  | NFR001 |
+| ------------- |:-------------:|
+| Name:      | Desktop and mobile-friendly UI |
+| Description:  | Customers can visit the website on a variety of devices and be presented with a visually appealing, easy to navigate interface every time. |
+| Primary Actor: | Customer |
+| Preconditions: | Customer has navigated to the website on their device of choice |
+| Postconditions: | Customer is able to browse and perform necessary actions on the website |
+| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer navigates to the Vital website. <br> 2. System sends the necessary data for rendering the application depending on what kind of device they're using. <br> 4. System displays the frontend for customer to interact with. |
+
+| ID:  | NFR002 |
+| ------------- |:-------------:|
+| Name:      | Encryption of sensitive customer data |
+| Description:  | Customers' data is encrypted to prevent data exfiltration that may be attempted by cyber attackers. |
+| Primary Actor: | System |
+| Preconditions: | Customer has provided data to the system |
+| Postconditions: | Customer data is stored securely |
+| Main Success Scenario:<br><br>(Normal Flow) | 1. Database server is configured to encrypt and decrypt data with a specific key/password. <br> 2. System provides the server with the key after confirming a customer's login is authenticated to fetch their data. <br> 4. System displays customer's data. |
+
+| ID:  | NFR001 |
+| ------------- |:-------------:|
+| Name:      | Convenient checkout options |
+| Description:  | Customer has a choice between regular credit card checkout and additional methods like Paypal, Apple Pay etc., adding flexibility to the software. |
+| Primary Actor: | Customer |
+| Preconditions: | Customer has added at least one item to cart |
+| Postconditions: | Customer has placed an order with the Customer has placed an order with the payment method of their choice |
+| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer selects their preferred payment method. <br> 2. Customer fills out the necessary fields/completes the necessary steps for that payment method. <br> 3. Customer clicks "Place order." |
   
 ![Diagramming](https://github.com/msavoiu/CPSC-362-Group-Project-Activity-1/blob/09ccb42f5b07b26ddc2258c5af26541856db8f3b/fds.drawio.png)
