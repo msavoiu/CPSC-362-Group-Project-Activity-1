@@ -61,11 +61,25 @@ __Inventory Information__
 |User:         | Actor   |
 | Story Description:     | An inventory system that shows availability of colors and sizes for different products. |
 
+| Story Card    |           |
+| ------------- |:---------:|
+| Story ID:    |xxxx|
+| Story Name:      | sign in /sign up page |
+|User:         | Actor   |
+| Story Description:     | User login page with email and password.. |
+| Preconditions: | customer  has an active account or can register |
+| Postconditions: | customer  has access to account dashboard |
+| main success scenario : | 1. Customer clicks account icon from any page on the website. 2. Customer signs in or signs up  |
 
-__Account information for tracking orders__
-
-__Categorization by clothing type / style__
-
+| Story Card    |           |
+| ------------- |:---------:|
+| Story ID:    |xxxxx|
+| Story Name:      | Product Search |
+|User:         | Actor   |
+| Story Description:     | A search functionality that user can search for product with keywords |
+| Preconditions: | Products are updated with names |
+| Postconditions: | customer finds product |
+| main success scenario : | 1. Customer clicks the search button from the website. 2. Customer searches for products by keywords 3. Products based on customers keywords show on page 4. Customer clicks on product |
 
 | ID: | xxx |
 | ------------- |:-------------:|
