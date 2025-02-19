@@ -65,7 +65,7 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Postconditions: | Customer is viewing products they're interested in purchasing |
 | Main Success Scenario:<br><br>(Normal Flow) | 1. Customer clicks the search button from the navigation bar. <br> 2. Customer searches for products they're interested in by providing keywords <br> 3. System displays products tagged with at least one of the provided keywords. |
 
-| ID: | Fr008 |
+| ID: | FR008 |
 | ------------- |:-------------:|
 | Name: | View and track purchases |
 | Description: | Customer accesses their account page and is able to view orders placed. They can select an individual order to check its details and shipping status. |
