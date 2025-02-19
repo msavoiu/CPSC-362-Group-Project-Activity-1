@@ -1,4 +1,4 @@
-# Vital - CPSC-362
+# Vital
 
 ## Product vision
 Vital is a online fashion brand for the everyday consumer. For those who aren’t willing to spend the heavy costs that come with the latest fashions and trends, Vital offers timeless basics which can be mixed and matched to elevate any closet. Unlike competitors like Uniqlo, Vital offers more competitive pricing for our apparel. Consumers can enjoy regular deals and sales on products use the same high-quality materials as these other brands.
