@@ -15,11 +15,11 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | ID:  | FR001 |
 | ------------- |:-------------:|
 | Name:      | Home page |
-| Description: | |
+| Description: | Customer is brought to the main page of the website |
 | Primary Actor: | Customer |
-| Preconditions: | Customer has added at least one item to cart |
-| Postconditions: | Customer has successfully placed an order which will be sent to and fulfilled by Vital |
-| Main Success Scenario: |
+| Preconditions: | Customer has pointed browser to https://vital.com |
+| Postconditions: | Customer can view the homepage |
+| Main Success Scenario: | 1. Customer navigates to the website URL. <br> 2. System displays all the components of the homepage.  |
 
 | ID:  | FR002 |
 | ------------- |:-------------:|
@@ -37,16 +37,16 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Primary Actor:      | Customer     |
 | Preconditions: | Customer has accessed the website |
 | Postconditions: | Customer has viewed specific Vital products they are interested in |
-| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer hovers over the payme"Apparel" section of the navigation bar. <br> 2. System displays in a dropdown menu idsplaying the different types (e.g. tops, pants, denim, accessories) and styles (e.g. casual, business-casual, athleisure) of clothing Vital sells. <br> 3. Customer selects a specific category to view. <br> 4. System displays the category's corresponding catalog, from which customers can select specific items to view in more detail. |
+| Main Success Scenario:<br><br>(Normal Flow) | 1. Customer hovers over the "Apparel" section of the navigation bar. <br> 2. System displays in a dropdown menu idsplaying the different types (e.g. tops, pants, denim, accessories) and styles (e.g. casual, business-casual, athleisure) of clothing Vital sells. <br> 3. Customer selects a specific category to view. <br> 4. System displays the category's corresponding catalog, from which customers can select specific items to view in more detail. |
 
 | ID:  | FR004 |
 | ------------- |:-------------:|
 | Name:      | Product page |
-| Description: | |
-| Primary Actor: | Customer |
+| Description: | Displays relevant information regarding the product selected (colors/patterns, sizes, availability, model photos) |
+| Primary Actor: | Customer has selected a specific product |
 | Preconditions: | Customer has added at least one item to cart |
-| Postconditions: | Customer has successfully placed an order which will be sent to and fulfilled by Vital |
-| Main Success Scenario: |
+| Postconditions: | Customer is able to view details about the product and add it to cart |
+| Main Success Scenario: | 1. Customer clicks on a specific product. <br> 2. System displays the relevant information, grabbing inventory status from the inventory database. |
 
 | ID:  | FR005 |
 | ------------- |:-------------:|
@@ -112,8 +112,6 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Main Success Scenario:<br><br>(Normal Flow) | 1. Employee connects to Vital's database via a command-line tool like Postgres or ORM (e.g. Prisma). <br> 2. When queried, system displays a list of the items currently in stock. <br> 3. Employee adds/modifies entries to reflect changes in real-life inventory. <br> 4. Customer-facing website is automatically updated when inventory data is fetched from the database upon visit. |
 
 ### Non-functional requirements
-- Convenient checkout options (Paypal, Apple Pay, etc.)
-
 | ID:  | NFR001 |
 | ------------- |:-------------:|
 | Name:      | Desktop and mobile-friendly UI |
