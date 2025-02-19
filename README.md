@@ -139,4 +139,4 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Postconditions: | Customer has placed an order with the Customer has placed an order with the payment method of their choice |
 | Main Success Scenario:<br><br>(Normal Flow) | 1. Customer selects their preferred payment method. <br> 2. Customer fills out the necessary fields/completes the necessary steps for that payment method. <br> 3. Customer clicks "Place order." |
   
-![Diagramming](https://github.com/msavoiu/CPSC-362-Group-Project-Activity-1/blob/09ccb42f5b07b26ddc2258c5af26541856db8f3b/fds.drawio.png)
+![Diagramming](https://github.com/msavoiu/CPSC-362-Group-Project-Activity-1/blob/706b8d486aa337414dddcde24064687a4e64fe00/diagram.drawio.png)
