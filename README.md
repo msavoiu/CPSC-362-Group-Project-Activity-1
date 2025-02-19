@@ -94,6 +94,8 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | Main Success Scenario:<br><br>(Normal Flow) | 1. Customer clicks "Place order" to send their order to the system. <br> 2. System sends requests to the payment API to process the order. <br> 3. API responds back indicating whether the payment was successful or not. <br> 4. System displays the appropriate response message for the customer, either indicating that the payment was successful or prompting them to try again/try a different payment method, etc. |
 
 ### Non-functional requirements
+- Convenient checkout options (Paypal, Apple Pay, etc.)
+
 | ID:  | NFR001 |
 | ------------- |:-------------:|
 | Name:      | Desktop and mobile-friendly UI |
@@ -106,7 +108,7 @@ Vital is a online fashion brand for the everyday consumer. For those who aren’
 | ID:  | NFR002 |
 | ------------- |:-------------:|
 | Name:      | Encryption of sensitive customer data |
-| Description:  | Customers' data is encrypted to prevent data exfiltration that may be attempted by cyber attackers. |
+| Description:  | Customers' data is encrypted to prevent data exfiltration that may be attempted by cyber attackers. API requests/responses are also sent over HTTPS. |
 | Primary Actor: | System |
 | Preconditions: | Customer has provided data to the system |
 | Postconditions: | Customer data is stored securely |
