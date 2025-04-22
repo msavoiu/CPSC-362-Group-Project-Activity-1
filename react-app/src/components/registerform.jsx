@@ -8,7 +8,7 @@ function RegisterForm() {
 
     const message = "";
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         const value = e.target.value;
         setState({
             ...state,
@@ -16,7 +16,7 @@ function RegisterForm() {
         });
     };
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         e.preventDefault();
 
         const { email, password } = state;

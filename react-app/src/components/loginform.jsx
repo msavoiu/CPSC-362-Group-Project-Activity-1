@@ -6,7 +6,7 @@ function LoginForm() {
         password: ""
     });
 
-    const handleChange = e => {
+    const onChange = (e) => {
         const value = e.target.value;
         setState({
             ...state,
@@ -14,7 +14,7 @@ function LoginForm() {
         });
     };
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         e.preventDefault();
 
         const { email, password } = state;
@@ -36,14 +36,14 @@ function LoginForm() {
                     placeholder="Email"
                     name="email"
                     value={state.email}
-                    onChange={handleChange}
+                    onChange={onChange}
                 />
                 <input
                     type="password"
                     name="password"
                     placeholder="Password"
                     value={state.password}
-                    onChange={handleChange}
+                    onChange={onChange}
                 />
                 {/* { !res.ok &&
                     <p>
