@@ -1,6 +1,8 @@
 import React from "react";
 import "./navbar.css";
 
+import SearchBar from "./searchbar.jsx";
+
 function Navbar() {
     return (
         <nav className="navbar">
@@ -20,6 +22,7 @@ function Navbar() {
                 </ul>
             </div>
             <div className="navbar-right">
+                <SearchBar/>
                 <a href="/cart" className="cart-icon">
                     <i className="fas fa-shopping-cart"></i>
                     <span className="cart-count">0</span>
