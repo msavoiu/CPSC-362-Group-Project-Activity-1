@@ -2,6 +2,7 @@ import sqlite3
 from datetime import datetime
 from collections import Counter
 from Database import *
+import hashlib
 
 conn = sqlite3.connect('database.db')
 cursor = conn.cursor()
@@ -15,10 +16,15 @@ session_customer_id = None
 # Logs customer in and sets the session_customer_id to the customers ID to keep track of cart and order history
 def Customer_login(email, password):
     global session_customer_id
+
+    # HASHES PASSWORD
+    hash_object = hashlib.sha256(password.encode())
+    hex_dig = hash_object.hexdigest()
+
     cursor.execute('''
         SELECT customer_id, email FROM customers
         WHERE email = ? AND password = ?
-    ''', (email, password))
+    ''', (email, hex_dig))
     row = cursor.fetchone()
     
     if row:
@@ -30,14 +36,19 @@ def Customer_login(email, password):
     
 # CUSTOMER REGISTER / LOG IN
 # Creates a new customer and logs them in, sets the session_customer_id to the customers ID to keep track of cart and order history
-def Register(email, password):
+def Customer_register(email, password):
     global session_customer_id
-    add_customer(email, password)
+
+    hash_object = hashlib.sha256(password.encode())
+    hex_dig = hash_object.hexdigest()
+
+
+    add_customer(email, hex_dig)
     
     cursor.execute('''
         SELECT customer_id, email FROM customers
         WHERE email = ? AND password = ?
-    ''', (email, password))
+    ''', (email, hex_dig))
     row = cursor.fetchone()
     
     if row:
@@ -50,6 +61,7 @@ def Register(email, password):
     
     
 # TESTING SECTION
-Customer_login("landon@gmail.com", "landonpassword")
-print("Session ID is " + str(session_customer_id))
-#view_all_customers()
+view_all_customers()
+#Customer_register("landon@gmail.com", "landonpassword")
+#Customer_login("landon@gmail.com", "landonpassword")
+#print("Session ID is " + str(session_customer_id))
