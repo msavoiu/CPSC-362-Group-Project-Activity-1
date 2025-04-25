@@ -1,4 +1,5 @@
 import React from "react";
+import "./profile.css";
 // import Order from "./../components/order.jsx";
 
 function Profile() {
@@ -12,9 +13,8 @@ function Profile() {
     return (
         <>
             <div className="profile-block">
-                <img src="./../static/usericon.png" alt="User icon"></img>
-                <h1>Firstname Lastname</h1>
-                <h3>user@email.com</h3>
+                <img src="../static/usericon.png" alt="User icon"></img>
+                <h1>user@email.com</h1>
             </div>
 
             <h2>Recent Orders</h2>

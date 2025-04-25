@@ -48,7 +48,7 @@ function RegisterForm() {
     return (
         <div className="form-container sign-in-container">
             <form onSubmit={onSubmit}>
-                <h1>sign ip</h1>
+                <h1>sign up</h1>
                 <input
                     type="email"
                     placeholder="email"
@@ -68,7 +68,7 @@ function RegisterForm() {
                         email is already in use. please choose a different one.
                     </p>
                 }
-                <button>register</button>
+                <button class="button">register</button>
             </form>
         </div>
     );

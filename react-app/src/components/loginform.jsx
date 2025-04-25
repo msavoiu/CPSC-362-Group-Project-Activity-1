@@ -70,7 +70,7 @@ function LoginForm() {
                         email and/or password is incorrect.
                     </p>
                 }
-                <button>login</button>
+                <button class="button">login</button>
             </form>
         </div>
     );
