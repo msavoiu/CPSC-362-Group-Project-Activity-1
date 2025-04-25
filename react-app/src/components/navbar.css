@@ -6,7 +6,9 @@
     color: black;
     padding: 1rem;
     position: fixed;
+    left: 0px;
     top: 0px;
+    width: 100%;
   }
   
   .navbar-left .logo {
@@ -42,6 +44,7 @@
     color: #fff;
     text-decoration: none;
     margin-left: 1rem;
+    padding-left: 1rem;
     position: relative;
   }
   

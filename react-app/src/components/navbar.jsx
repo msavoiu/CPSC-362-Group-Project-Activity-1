@@ -17,6 +17,9 @@ function Navbar() {
                         <a href="/catalog">catalog</a>
                     </li>
                     <li>
+                        <a href="/profile">profile</a>
+                    </li>
+                    <li>
                         <a href="/about">about</a>
                     </li>
                 </ul>
