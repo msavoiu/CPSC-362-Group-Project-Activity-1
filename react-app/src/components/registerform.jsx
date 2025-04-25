@@ -5,8 +5,7 @@ function RegisterForm() {
         email: "",
         password: ""
     });
-
-    const message = "";
+    const [validRegister, setvalidRegister] = React.useState(true);
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -16,18 +15,35 @@ function RegisterForm() {
         });
     };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = async (e) => {
+        try {
+            e.preventDefault();
 
-        const { email, password } = state;
+            const { email, password } = state;
 
-        const res = fetch("api/register");
+            const response = await fetch("http://localhost:5000/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: email, password: password }),
+              });
+              
+            const res = response.json();
+    
+            alert(res.message);
 
-        if (res.ok) {
-            // Redirect to profile page
+            if (res.status != 200) {
+                setvalidRegister(false);
+            } else {
+                window.location.href = "/"; // redirect
+            }
+
+        } catch (error) {
+            console.error(error.message);
+            setvalidRegister(false);
         }
-
-    }
+    };
 
     return (
         <div className="form-container sign-in-container">
@@ -47,10 +63,9 @@ function RegisterForm() {
                     value={state.password}
                     onChange={handleChange}
                 />
-                { !res.ok ===  &&
+                { validRegister &&
                     <p>
-                        {res.message} 
-                        {/* Email is already in use. */}
+                        Email is already in use. Please choose a different one.
                     </p>
                 }
                 <button>Register</button>
