@@ -36,7 +36,7 @@ function LoginForm() {
             if (res.status != 200) {
                 setValidLogin(false);
             } else {
-                window.location.href = "/"; // redirect
+                window.location.href = "/profile"; // redirect
             }
 
         } catch (error) {
@@ -48,11 +48,11 @@ function LoginForm() {
     return (
         <div className="form-container sign-in-container">
             <form onSubmit={onSubmit}>
-                <h1>Sign In</h1>
+                <h1>sign in</h1>
                 <input
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="email"
                     id="email"
                     value={state.email}
                     onChange={onChange}
@@ -60,17 +60,17 @@ function LoginForm() {
                 <input
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="password"
                     id="password"
                     value={state.password}
                     onChange={onChange}
                 />
                 { !validLogin &&
                     <p>
-                        Email and/or password is incorrect.
+                        email and/or password is incorrect.
                     </p>
                 }
-                <button>Login</button>
+                <button>login</button>
             </form>
         </div>
     );

@@ -33,10 +33,10 @@ function RegisterForm() {
     
             alert(res.message);
 
-            if (res.status != 200) {
+            if (res.status != 201) {
                 setvalidRegister(false);
             } else {
-                window.location.href = "/"; // redirect
+                window.location.href = "/profile"; // redirect
             }
 
         } catch (error) {
@@ -48,10 +48,10 @@ function RegisterForm() {
     return (
         <div className="form-container sign-in-container">
             <form onSubmit={onSubmit}>
-                <h1>Sign Up</h1>
+                <h1>sign ip</h1>
                 <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="email"
                     name="email"
                     value={state.email}
                     onChange={handleChange}
@@ -59,16 +59,16 @@ function RegisterForm() {
                 <input
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="password"
                     value={state.password}
                     onChange={handleChange}
                 />
-                { validRegister &&
+                { !validRegister &&
                     <p>
-                        Email is already in use. Please choose a different one.
+                        email is already in use. please choose a different one.
                     </p>
                 }
-                <button>Register</button>
+                <button>register</button>
             </form>
         </div>
     );

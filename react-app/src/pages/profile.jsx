@@ -1,13 +1,13 @@
 import React from "react";
-import Order from "./../components/order.jsx";
+// import Order from "./../components/order.jsx";
 
-function ProfilePage() {
-    const orders = []; // Fetch request to get all the orders corresponding to the user
-    const ordersList = [];
+function Profile() {
+    // const orders = []; // Fetch request to get all the orders corresponding to the user
+    // const ordersList = [];
 
-    for (const order of orders) {
-        ordersList.push(<Order />); // Pass order ID in as a prop?
-    }
+    // for (const order of orders) {
+    //     ordersList.push(<Order />); // Pass order ID in as a prop?
+    // }
 
     return (
         <>
@@ -18,11 +18,11 @@ function ProfilePage() {
             </div>
 
             <h2>Recent Orders</h2>
-            <ul>
+            {/* <ul>
                 {orders}
-            </ul>
+            </ul> */}
         </>
     );
 }
 
-export default ProfilePage;
+export default Profile;
