@@ -9,6 +9,8 @@ app.secret_key = '362'  #key
 
 DATABASE = 'database.db'
 
+session_customer_id = None
+
 def get_db():
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
@@ -23,7 +25,7 @@ def add_product(color, size, quantity, description):
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO inventory (color, size, quantity, description)
+        INSERT INTO inventory (color, size, quantity, description, image_url)
         VALUES (?, ?, ?, ?)
     ''', (color, size, quantity, description))
     conn.commit()
@@ -33,7 +35,7 @@ def add_product(color, size, quantity, description):
 def view_all_products():
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute('SELECT product_id, color, size, quantity, description FROM inventory')
+    cursor.execute('SELECT product_id, color, size, quantity, description, image_url FROM inventory')
     products = cursor.fetchall()
     close_db(conn)
     return [dict(row) for row in products]
@@ -121,14 +123,25 @@ def view_cart(customer_id):
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT c.product_id, i.color, i.size, i.description, c.quantity
+        SELECT c.product_id, i.color, i.size, i.description, i.image_url, c.quantity
         FROM cart c
         JOIN inventory i ON c.product_id = i.product_id
         WHERE c.customer_id = ?
     ''', (customer_id,))
     items = cursor.fetchall()
     close_db(conn)
-    return [dict(row) for row in items]
+    return [
+        {
+            'product_id': row['product_id'],
+            'color': row['color'],
+            'size': row['size'],
+            'description': row['description'],
+            'image_url': row['image_url'],
+            'quantity': row['quantity']
+        }
+        for row in items
+    ]
+
 
 def place_order_from_cart(customer_id):
     conn = get_db()
@@ -173,7 +186,9 @@ def place_order_from_cart(customer_id):
         close_db(conn)
         return False, "\n".join(errors)
 
-# --- API Routes ---
+# API ROUTES
+
+# LOGS IN USER
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -189,15 +204,27 @@ def login():
     user = get_customer_by_email(email)
 
     if user:
-        hashed_provided_password = hashlib.sha256(password.encode()).hexdigest()
-        if hashed_provided_password == user['password']:
+        pre_hash = hashlib.sha256(password.encode()).hexdigest()
+        hashed_provided_password = hashlib.sha256(pre_hash.encode()).hexdigest()
+        
+        stored_password = user['password']
+
+        if hashed_provided_password == stored_password:
             session['user_id'] = user['customer_id']
-            return jsonify({'message': 'Login successful', 'user_id': user['customer_id']}), 200
+            session_customer_id = user['customer_id']
+            return jsonify({
+                'message': 'Login successful',
+                'user_id': user['customer_id'],
+                'user_email': email,
+            }), 200
         else:
-            return jsonify({'message': 'Invalid credentials!'}), 401
+            return jsonify({
+                'message': 'Invalid credentials!'
+            }), 401
     else:
         return jsonify({'message': 'Invalid credentials!'}), 401
 
+# REGISTER AND LOGS IN USER
 @app.route('/api/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -210,7 +237,12 @@ def register():
     if not email or not password:
         return jsonify({'message': 'Email and password are required!'}), 400
 
-    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+    password = password.strip()
+    
+    hash_object = hashlib.sha256(password.encode())
+    hashed_password = hash_object.hexdigest()
+    
+    
     if add_customer(email, hashed_password):
         user = get_customer_by_email(email)
         session['user_id'] = user['customer_id']
@@ -218,6 +250,7 @@ def register():
     else:
         return jsonify({'message': 'Email already exists!'}), 409 # Conflict
 
+# SHOWS PROFILE INFORMATION (ORDER HISTORY, CUSTOMER ID, AND EMAIL)
 @app.route('/api/profile', methods=['GET'])
 def profile():
     if 'user_id' in session:
@@ -231,11 +264,13 @@ def profile():
     else:
         return jsonify({'message': 'Unauthorized'}), 401
 
+# SHOWS ALL INVENTORY
 @app.route('/api/catalog', methods=['GET'])
 def catalog():
     products = view_all_products()
     return jsonify({'products': products}), 200
 
+# SHOWS ITEMS IN CART
 @app.route('/api/cart', methods=['GET'])
 def get_cart():
     if 'user_id' in session:
@@ -244,6 +279,7 @@ def get_cart():
     else:
         return jsonify({'message': 'Unauthorized'}), 401
 
+# ADDS ITEM TO CART
 @app.route('/api/cart/add', methods=['POST'])
 def add_item_to_cart():
     if 'user_id' in session:
@@ -263,6 +299,7 @@ def add_item_to_cart():
     else:
         return jsonify({'message': 'Unauthorized'}), 401
 
+# CHECKOUTS ALL ITEMS IN CART 
 @app.route('/api/checkout', methods=['POST'])
 def checkout():
     if 'user_id' in session:
@@ -273,6 +310,106 @@ def checkout():
             return jsonify({'message': message}), 400
     else:
         return jsonify({'message': 'Unauthorized'}), 401
+    
+    
+# SHOWS ALL CUSTOMERS
+@app.route('/api/customers', methods=['GET'])
+def get_all_customers():
+    customers = []
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT customer_id, email, password FROM customers")
+    rows = cursor.fetchall()
+    for row in rows:
+        customers.append({
+            'customer_id': row['customer_id'],
+            'email': row['email'],
+            'password': row['password']
+        })
+    close_db(conn)
+    return jsonify({'customers': customers}), 200
+
+# SEARCH
+@app.route('/api/search', methods=['POST'])
+def search_inventory():
+    data = request.get_json()
+    if not data or 'keyword' not in data:
+        return jsonify({'message': 'JSON with "keyword" field is required'}), 400
+
+    keyword = f"%{data['keyword']}%"
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT product_id, color, size, quantity, description, image_url
+        FROM inventory
+        WHERE description LIKE ?
+    ''', (keyword,))
+    results = cursor.fetchall()
+    close_db(conn)
+
+    if not results:
+        return jsonify({'message': 'No matching items found'}), 404
+
+    items = [
+        {
+            'product_id': row['product_id'],
+            'color': row['color'],
+            'size': row['size'],
+            'quantity': row['quantity'],
+            'description': row['description'],
+            'image_url': row['image_url']
+        }
+        for row in results
+    ]
+    return jsonify({'results': items}), 200
+
+# REMOVE FROM CART
+@app.route('/api/cart/remove', methods=['POST'])
+def remove_item_from_cart():
+    if 'user_id' not in session:
+        return jsonify({'message': 'Unauthorized'}), 401
+
+    data = request.get_json()
+    if not data:
+        return jsonify({'message': 'No JSON data provided'}), 400
+
+    product_id = data.get('product_id')
+    quantity_to_remove = data.get('quantity', 1)  # Default to removing 1 if not provided
+
+    if not product_id or quantity_to_remove <= 0:
+        return jsonify({'message': 'Valid product ID and quantity are required'}), 400
+
+    customer_id = session['user_id']
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT quantity FROM cart WHERE customer_id = ? AND product_id = ?
+    ''', (customer_id, product_id))
+    row = cursor.fetchone()
+
+    if not row:
+        close_db(conn)
+        return jsonify({'message': 'Item not found in cart'}), 404
+
+    current_quantity = row['quantity']
+
+    if quantity_to_remove >= current_quantity:
+        cursor.execute('''
+            DELETE FROM cart WHERE customer_id = ? AND product_id = ?
+        ''', (customer_id, product_id))
+        message = f"Removed entire Product ID {product_id} from cart."
+    else:
+        cursor.execute('''
+            UPDATE cart SET quantity = quantity - ?
+            WHERE customer_id = ? AND product_id = ?
+        ''', (quantity_to_remove, customer_id, product_id))
+        message = f"Removed {quantity_to_remove} of Product ID {product_id} from cart."
+
+    conn.commit()
+    close_db(conn)
+    return jsonify({'message': message}), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -24,9 +24,11 @@ CREATE TABLE IF NOT EXISTS inventory (
     color TEXT NOT NULL,
     size TEXT NOT NULL,
     quantity INTEGER NOT NULL,
-    description TEXT
+    description TEXT,
+    image_url TEXT
 )
 ''')
+
 
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS cart (
@@ -55,24 +57,40 @@ conn.commit()
 
 
 # ADDS PRODUCT TO INVENTORY
-def add_product(color, size, quantity, description):
+def add_product(color, size, quantity, description, image_url):
     cursor.execute('''
-        INSERT INTO inventory (color, size, quantity, description)
-        VALUES (?, ?, ?, ?)
-    ''', (color, size, quantity, description))
+        INSERT INTO inventory (color, size, quantity, description, image_url)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (color, size, quantity, description, image_url))
     conn.commit()
     print("Product added to inventory.")
+    
+# REMOVES PRODUCT FROM INVENTORY
+def remove_product(product_id):
+    cursor.execute("SELECT * FROM inventory WHERE product_id = ?", (product_id,))
+    if not cursor.fetchone():
+        print(f"No product found with ID {product_id}.")
+        return
+
+    cursor.execute("DELETE FROM cart WHERE product_id = ?", (product_id,))
+    cursor.execute("DELETE FROM ordered_items WHERE product_id = ?", (product_id,))
+    cursor.execute("DELETE FROM inventory WHERE product_id = ?", (product_id,))
+    conn.commit()
+    print(f"Product ID {product_id} and related data removed.")
+
+
 
 # LISTS ALL PRODUCTS
 def view_all_products():
-    cursor.execute('SELECT product_id, color, size, quantity, description FROM inventory')
+    cursor.execute('SELECT product_id, color, size, quantity, description, image_url FROM inventory')
     products = cursor.fetchall()
     if not products:
         print("Inventory is empty.")
         return
     print("All Products in Inventory:")
     for p in products:
-        print(f"ID {p[0]} | {p[1]} {p[2]} — {p[3]} in stock — {p[4]}")
+        print(f"ID {p[0]} | {p[1]} {p[2]} — {p[3]} in stock — {p[4]} | Image URL: {p[5]}")
+
 
 # ADDS CUSTOMER
 def add_customer(email, password):
@@ -214,6 +232,107 @@ def view_order_history(customer_id):
         cursor.execute("SELECT color, size, description FROM inventory WHERE product_id = ?", (order[2],))
         info = cursor.fetchone()
         print(f"- Order ID {order[0]} | {order[3]}x {info[0]} {info[1]} — {info[2]} | Date: {order[1]}")
+        
+# REMOVES ALL CUSTOMERS
+def remove_all_customers():
+  
+    cursor.execute("DELETE FROM cart")
+    cursor.execute("DELETE FROM ordered_items")
+    cursor.execute("DELETE FROM customers")
+    
+ 
+    cursor.execute("DELETE FROM sqlite_sequence WHERE name='customers'")
+    
+    conn.commit()
+    print("All customers and related data have been deleted. Customer ID counter reset.")
+
+def search_inventory_by_description(keyword):
+    keyword = f"%{keyword}%"
+    cursor.execute('''
+        SELECT product_id, color, size, quantity, description, image_url
+        FROM inventory
+        WHERE description LIKE ?
+    ''', (keyword,))
+    results = cursor.fetchall()
+
+    if not results:
+        print("No matching items found.")
+        return
+
+    print(f"🔍 Search results for description containing '{keyword.strip('%')}':")
+    for item in results:
+        print(f"ID {item[0]} | {item[1]} {item[2]} — {item[3]} in stock — {item[4]} | Image URL: {item[5]}")
+        
+        
+def edit_product(product_id, color=None, size=None, quantity=None, description=None, image_url=None):
+    cursor.execute("SELECT * FROM inventory WHERE product_id = ?", (product_id,))
+    if not cursor.fetchone():
+        print(f"No product found with ID {product_id}.")
+        return
+
+    updates = []
+    values = []
+
+    if color is not None:
+        updates.append("color = ?")
+        values.append(color)
+    if size is not None:
+        updates.append("size = ?")
+        values.append(size)
+    if quantity is not None:
+        updates.append("quantity = ?")
+        values.append(quantity)
+    if description is not None:
+        updates.append("description = ?")
+        values.append(description)
+    if image_url is not None:
+        updates.append("image_url = ?")
+        values.append(image_url)
+
+    if not updates:
+        print("No fields provided to update.")
+        return
+
+    update_clause = ", ".join(updates)
+    values.append(product_id)
+
+    cursor.execute(f'''
+        UPDATE inventory
+        SET {update_clause}
+        WHERE product_id = ?
+    ''', values)
+
+    conn.commit()
+    print(f" Product ID {product_id} has been updated.")
+    
+# REMOVES ITEM FROM CART
+def remove_from_cart(customer_id, product_id, quantity):
+    cursor.execute('''
+        SELECT quantity FROM cart WHERE customer_id = ? AND product_id = ?
+    ''', (customer_id, product_id))
+    row = cursor.fetchone()
+
+    if not row:
+        print(f"No such item in the cart for customer ID {customer_id} and product ID {product_id}.")
+        return
+
+    current_quantity = row[0]
+
+    if quantity >= current_quantity:
+        cursor.execute('''
+            DELETE FROM cart WHERE customer_id = ? AND product_id = ?
+        ''', (customer_id, product_id))
+        print(f"Removed entire Product ID {product_id} from customer ID {customer_id}'s cart.")
+    else:
+        cursor.execute('''
+            UPDATE cart SET quantity = quantity - ?
+            WHERE customer_id = ? AND product_id = ?
+        ''', (quantity, customer_id, product_id))
+        print(f"Removed {quantity} of Product ID {product_id} from customer ID {customer_id}'s cart.")
+
+    conn.commit()
+
+
 
 # FUNCTION CHEAT SHEET
 # add_product(color, size, quantity, description)

@@ -18,6 +18,7 @@ def Customer_login(email, password):
     global session_customer_id
 
     # HASHES PASSWORD
+    password = password.strip()
     hash_object = hashlib.sha256(password.encode())
     hex_dig = hash_object.hexdigest()
 
@@ -61,7 +62,7 @@ def Customer_register(email, password):
     
     
 # TESTING SECTION
-view_all_customers()
-#Customer_register("landon@gmail.com", "landonpassword")
+#view_all_customers()
+#Customer_register("two", "one")
 #Customer_login("landon@gmail.com", "landonpassword")
-#print("Session ID is " + str(session_customer_id))
+
