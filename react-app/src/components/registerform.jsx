@@ -1,4 +1,5 @@
 import React from "react";
+import "./form.css";
 
 function RegisterForm() {
     const [state, setState] = React.useState({
@@ -30,10 +31,10 @@ function RegisterForm() {
               });
               
             const res = response.json();
-    
-            alert(res.message);
 
-            if (res.status != 201) {
+            console.log(res.status)
+
+            if (response.status != 201) {
                 setvalidRegister(false);
             } else {
                 window.location.href = "/profile"; // redirect
@@ -46,8 +47,8 @@ function RegisterForm() {
     };
 
     return (
-        <div className="form-container sign-in-container">
-            <form onSubmit={onSubmit}>
+        <>
+            <form className="user-form" onSubmit={onSubmit}>
                 <h1>sign up</h1>
                 <input
                     type="email"
@@ -70,7 +71,7 @@ function RegisterForm() {
                 }
                 <button class="button">register</button>
             </form>
-        </div>
+        </>
     );
 }
 

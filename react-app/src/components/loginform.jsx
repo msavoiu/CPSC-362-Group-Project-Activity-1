@@ -1,4 +1,5 @@
 import React from "react";
+import "./form.css";
 
 function LoginForm() {
     const [state, setState] = React.useState({
@@ -30,10 +31,8 @@ function LoginForm() {
               });
               
             const res = response.json();
-    
-            alert(res.message);
 
-            if (res.status != 200) {
+            if (response.status != 200) {
                 setValidLogin(false);
             } else {
                 window.location.href = "/profile"; // redirect
@@ -46,8 +45,8 @@ function LoginForm() {
     };
 
     return (
-        <div className="form-container sign-in-container">
-            <form onSubmit={onSubmit}>
+        <>
+            <form className="user-form" onSubmit={onSubmit}>
                 <h1>sign in</h1>
                 <input
                     type="email"
@@ -72,7 +71,7 @@ function LoginForm() {
                 }
                 <button class="button">login</button>
             </form>
-        </div>
+        </>
     );
 }
 
