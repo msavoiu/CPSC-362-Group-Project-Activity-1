@@ -335,7 +335,7 @@ def remove_from_cart(customer_id, product_id, quantity):
 
 
 # FUNCTION CHEAT SHEET
-# add_product(color, size, quantity, description)
+# add_product(color, size, quantity, description, image_URL)
 # view_all_products()
 # restock_product(product_id, ammount)
 # add_to_cart(customer_id, product_id, quantity)
@@ -343,3 +343,6 @@ def remove_from_cart(customer_id, product_id, quantity):
 # clear_cart(customer_id)
 # place_order_from_cart(customer_id)
 # view_order_history(customer_id)
+#add_product("yellow", "small", "20", "Small Yellow Windbreaker", "small_yellow_windbreaker.png")
+#view_all_products()
+#view_all_customers()
