@@ -49,7 +49,7 @@ function RegisterForm() {
     return (
         <>
             <form className="user-form" onSubmit={onSubmit}>
-                <h1>sign up</h1>
+                <h1>Sign Up</h1>
                 <input
                     type="email"
                     placeholder="email"
@@ -66,10 +66,10 @@ function RegisterForm() {
                 />
                 { !validRegister &&
                     <p>
-                        email is already in use. please choose a different one.
+                        Email is already in use. Please choose a different one.
                     </p>
                 }
-                <button className="button">register</button>
+                <button className="button">Register</button>
             </form>
         </>
     );

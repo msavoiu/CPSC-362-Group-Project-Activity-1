@@ -48,7 +48,7 @@ function LoginForm() {
     return (
         <>
             <form className="user-form" onSubmit={onSubmit}>
-                <h1>sign in</h1>
+                <h1>Sign In</h1>
                 <input
                     type="email"
                     name="email"
@@ -67,10 +67,10 @@ function LoginForm() {
                 />
                 { !validLogin &&
                     <p>
-                        email and/or password is incorrect.
+                        Email and/or password is incorrect.
                     </p>
                 }
-                <button className="button">login</button>
+                <button className="button">Login</button>
             </form>
         </>
     );
