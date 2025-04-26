@@ -69,7 +69,7 @@ function RegisterForm() {
                         email is already in use. please choose a different one.
                     </p>
                 }
-                <button class="button">register</button>
+                <button className="button">register</button>
             </form>
         </>
     );

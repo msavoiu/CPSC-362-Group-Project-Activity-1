@@ -27,6 +27,7 @@ function LoginForm() {
                 headers: {
                     "Content-Type": "application/json"
                 },
+                credentials: "include",
                 body: JSON.stringify({ email: email, password: password }),
               });
               
@@ -69,7 +70,7 @@ function LoginForm() {
                         email and/or password is incorrect.
                     </p>
                 }
-                <button class="button">login</button>
+                <button className="button">login</button>
             </form>
         </>
     );
