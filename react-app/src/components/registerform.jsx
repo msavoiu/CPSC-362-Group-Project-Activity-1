@@ -47,12 +47,6 @@ function RegisterForm() {
                     value={state.password}
                     onChange={handleChange}
                 />
-                { !res.ok ===  &&
-                    <p>
-                        {res.message} 
-                        {/* Email is already in use. */}
-                    </p>
-                }
                 <button>Register</button>
             </form>
         </div>

@@ -53,3 +53,40 @@
     top: -0.5rem;
     right: -0.5rem;
   }
+
+  
+  /*shopping cart logo and css scaling
+  Jiles
+  */
+
+  .nav-cart {
+    position: relative;
+    margin-left: 1rem;
+  }
+  
+  .cart-link {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .cart-image {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+  
+  .cart-image:hover {
+    transform: scale(1.2);
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 0.7rem;
+    border-radius: 50%;
+    padding: 2px 6px;
+  }
+  
