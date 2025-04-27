@@ -1,10 +1,12 @@
 import React from "react";
+import "./form.css";
 
 function LoginForm() {
     const [state, setState] = React.useState({
         email: "",
         password: ""
     });
+    const [validLogin, setValidLogin] = React.useState(true);
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -14,45 +16,63 @@ function LoginForm() {
         });
     };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = async (e) => {
+        try {
+            e.preventDefault();
 
-        const { email, password } = state;
+            const { email, password } = state;
+            
+            const response = await fetch("http://localhost:5000/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({ email: email, password: password }),
+              });
+              
+            const res = response.json();
 
-        // const res = fetch("api/login");
+            if (response.status != 200) {
+                setValidLogin(false);
+            } else {
+                window.location.href = "/profile"; // redirect
+            }
 
-        // if (res.ok) {
-        //     Redirect to profile page
-        // }
-
-    }
+        } catch (error) {
+            console.error(error.message);
+            setValidLogin(false);
+        }
+    };
 
     return (
-        <div className="form-container sign-in-container">
-            <form onSubmit={onSubmit}>
+        <>
+            <form className="user-form" onSubmit={onSubmit}>
                 <h1>Sign In</h1>
                 <input
                     type="email"
-                    placeholder="Email"
                     name="email"
+                    placeholder="email"
+                    id="email"
                     value={state.email}
                     onChange={onChange}
                 />
                 <input
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="password"
+                    id="password"
                     value={state.password}
                     onChange={onChange}
                 />
-                {/* { !res.ok &&
+                { !validLogin &&
                     <p>
-                        Username and/or password is incorrect.
+                        Email and/or password is incorrect.
                     </p>
-                } */}
-                <button>Login</button>
+                }
+                <button className="button">Login</button>
             </form>
-        </div>
+        </>
     );
 }
 

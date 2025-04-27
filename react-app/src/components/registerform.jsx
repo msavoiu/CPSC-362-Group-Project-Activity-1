@@ -1,12 +1,12 @@
 import React from "react";
+import "./form.css";
 
 function RegisterForm() {
     const [state, setState] = React.useState({
         email: "",
         password: ""
     });
-
-    const message = "";
+    const [validRegister, setvalidRegister] = React.useState(true);
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -16,26 +16,43 @@ function RegisterForm() {
         });
     };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = async (e) => {
+        try {
+            e.preventDefault();
 
-        const { email, password } = state;
+            const { email, password } = state;
 
-        const res = fetch("api/register");
+            const response = await fetch("http://localhost:5000/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: email, password: password }),
+              });
+              
+            const res = response.json();
 
-        if (res.ok) {
-            // Redirect to profile page
+            console.log(res.status)
+
+            if (response.status != 201) {
+                setvalidRegister(false);
+            } else {
+                window.location.href = "/profile"; // redirect
+            }
+
+        } catch (error) {
+            console.error(error.message);
+            setvalidRegister(false);
         }
-
-    }
+    };
 
     return (
-        <div className="form-container sign-in-container">
-            <form onSubmit={onSubmit}>
+        <>
+            <form className="user-form" onSubmit={onSubmit}>
                 <h1>Sign Up</h1>
                 <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="email"
                     name="email"
                     value={state.email}
                     onChange={handleChange}
@@ -43,13 +60,18 @@ function RegisterForm() {
                 <input
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="password"
                     value={state.password}
                     onChange={handleChange}
                 />
-                <button>Register</button>
+                { !validRegister &&
+                    <p>
+                        Email is already in use. Please choose a different one.
+                    </p>
+                }
+                <button className="button">Register</button>
             </form>
-        </div>
+        </>
     );
 }
 

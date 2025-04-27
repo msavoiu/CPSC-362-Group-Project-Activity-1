@@ -20,7 +20,7 @@ function SearchBar() {
                     onSubmit={onSubmit}
                     onChange={onChange}
                     type="text"
-                    placeholder="Search"
+                    placeholder="search"
                     required
                 />
             </form>

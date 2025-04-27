@@ -2,15 +2,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
-    color: #fff;
+    background-color: white;
+    color: black;
     padding: 1rem;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
   }
   
   .navbar-left .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #fff;
+    color: black;
     text-decoration: none;
   }
   
@@ -26,7 +30,7 @@
   }
   
   .navbar-center .nav-links a {
-    color: #fff;
+    color: black;
     text-decoration: none;
   }
   
@@ -40,6 +44,7 @@
     color: #fff;
     text-decoration: none;
     margin-left: 1rem;
+    padding-left: 1rem;
     position: relative;
   }
   

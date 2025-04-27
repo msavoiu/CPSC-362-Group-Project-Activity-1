@@ -15,10 +15,13 @@ function Navbar() {
             <div className="navbar-center">
                 <ul className="nav-links">
                     <li>
-                        <a href="/catalog">Catalog</a>
+                        <a href="/catalog">catalog</a>
                     </li>
                     <li>
-                        <a href="/about">About</a>
+                        <a href="/profile">profile</a>
+                    </li>
+                    <li>
+                        <a href="/about">about</a>
                     </li>
                 </ul>
             </div>

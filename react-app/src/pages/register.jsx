@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterForm from "./../components/registerform.jsx"; // correct file path?
+import RegisterForm from "./../components/registerform.jsx";
 
 function Register() {
     return (
