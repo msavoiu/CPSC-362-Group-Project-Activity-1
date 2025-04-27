@@ -1,10 +1,10 @@
 import React from "react";
 import RegisterForm from "./../components/registerform.jsx";
 
-function Login() {
+function Register() {
     return (
         <RegisterForm />
     );
 }
 
-export default Login;
+export default Register;

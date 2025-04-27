@@ -12,6 +12,19 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* new */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+/* new */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
 
 a {
   font-weight: 500;
@@ -22,13 +35,13 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+/*body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
+}*/
 
 h1 {
   font-size: 3.2em;
