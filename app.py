@@ -3,8 +3,14 @@ import sqlite3
 import hashlib
 from datetime import datetime
 from collections import Counter
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app, supports_credentials=True, resources={
+    r"/api/*": {"origins": "http://localhost:5173"}
+})
+
 app.secret_key = '362'  #key
 
 DATABASE = 'database.db'
