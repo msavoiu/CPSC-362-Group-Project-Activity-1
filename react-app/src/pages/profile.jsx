@@ -67,7 +67,7 @@ export default function ProfilePage() {
                     <span>Email:</span> {user.email}
                 </div>
             </div>
-            
+            <hr/>
             <div>
                 <h2>Your Order History</h2>
                 
@@ -77,7 +77,7 @@ export default function ProfilePage() {
                     </div>
                 ) : (
                     Object.entries(orderGroups).map(([orderId, orderItems]) => (
-                        <div key={orderId}>
+                        <div className="order" key={orderId}>
                             <div>
                                 <div>
                                     <h3>Order #{orderId}</h3>
@@ -90,12 +90,12 @@ export default function ProfilePage() {
                                     <div key={`${orderId}-${item.product_id}-${index}`}>
                                         <div>
                                             {/* Placeholder for product image */}
-                                            <span>Item</span>
+                                            <span><b>Item:</b></span>
                                         </div>
                                         <div>
                                             <div>{item.description || "Product name unavailable"}</div>
                                             <div>
-                                                Product ID: {item.product_id}
+                                                <b>Product ID:</b> {item.product_id}
                                             </div>
                                             <div>
                                                 {item.color && `Color: ${item.color}`} 
@@ -104,16 +104,10 @@ export default function ProfilePage() {
                                             </div>
                                         </div>
                                         <div>
-                                            <div>Quantity: {item.quantity}</div>
+                                            <div><b>Quantity:</b> {item.quantity}</div>
                                         </div>
                                     </div>
                                 ))}
-                            </div>
-                            
-                            <div>
-                                <button>
-                                    View Order Details
-                                </button>
                             </div>
                         </div>
                     ))

@@ -2,13 +2,13 @@ import React from "react";
 import "./navbar.css";
 
 import SearchBar from "./searchbar.jsx";
-import { Link } from "react-router-dom"; /*for link in vital home page redirct Jiles*/
-/*updated navcart and the Jiles */
+import { Link } from "react-router-dom";
+
 function Navbar() {
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <Link to="/home" className="logo">
+                <Link to="/" className="logo">
                     VITAL
                 </Link>
             </div>
@@ -21,7 +21,10 @@ function Navbar() {
                         <a href="/profile">profile</a>
                     </li>
                     <li>
-                        <a href="/about">about</a>
+                        <a href="/login">login</a>
+                    </li>
+                    <li>
+                        <a href="/register">register</a>
                     </li>
                 </ul>
             </div>
@@ -31,11 +34,10 @@ function Navbar() {
                 <div className="nav-cart">
                     <a href="/cart" className="cart-link">
                         <img
-                            src="/img/cart.png"  // Make sure cart.png is inside public/img/
+                            src="/cart.png"
                             alt="Cart"
                             className="cart-image"
                         />
-                        <span className="cart-count">0</span>
                     </a>
                 </div>
 

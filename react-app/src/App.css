@@ -9,7 +9,29 @@
   color-scheme: light only;
 }
 
+.page-content {
+  padding: 4rem;
+}
+
+.splash {
+  max-width: 100%;
+  max-height: auto;
+  width: auto\9;
+}
+
 .button {
   background-color: white;
   color: black;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
 }

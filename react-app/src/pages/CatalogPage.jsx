@@ -2,10 +2,9 @@ import React from "react";
 import CatalogProduct from "../components/CatalogProduct";
 
 function CatalogPage() {
-    // Mock data — your backend team should replace this with API fetch
     const products = [
-        { id: 1, name: "Vital Hoodie", price: 59.99, image: "/img/hoodie.jpg" },
-        { id: 2, name: "Vital Tee", price: 29.99, image: "/img/tee.jpg" },
+        { id: 1, name: "Vital Hoodie", price: 59.99, image: "/hoodie.png" },
+        { id: 2, name: "Vital Tee", price: 29.99, image: "/shirt.png" },
     ];
 
     return (

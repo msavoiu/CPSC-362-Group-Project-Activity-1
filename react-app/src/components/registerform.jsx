@@ -52,7 +52,7 @@ function RegisterForm() {
                 <h1>Sign Up</h1>
                 <input
                     type="email"
-                    placeholder="email"
+                    placeholder="Email"
                     name="email"
                     value={state.email}
                     onChange={handleChange}
@@ -60,7 +60,7 @@ function RegisterForm() {
                 <input
                     type="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     value={state.password}
                     onChange={handleChange}
                 />

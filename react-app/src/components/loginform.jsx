@@ -52,7 +52,7 @@ function LoginForm() {
                 <input
                     type="email"
                     name="email"
-                    placeholder="email"
+                    placeholder="Email"
                     id="email"
                     value={state.email}
                     onChange={onChange}
@@ -60,7 +60,7 @@ function LoginForm() {
                 <input
                     type="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     id="password"
                     value={state.password}
                     onChange={onChange}

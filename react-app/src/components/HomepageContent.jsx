@@ -5,7 +5,9 @@ function HomepageContent() {
         <div className="homepage">
             <h1>Welcome to Vital</h1>
             <p>Explore our latest collection and find your fit.</p>
-            <button onClick={() => window.location.href = "/shop"}>
+            <button
+                onClick={() => window.location.href = "/catalog"}
+                className="button">
                 Shop Now
             </button>
         </div>

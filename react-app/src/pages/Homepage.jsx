@@ -4,6 +4,7 @@ import HomepageContent from "../components/HomepageContent";
 function Homepage() {
     return (
         <div>
+            <img src="/splash.jpg" alt="Catalog splash" className="splash"/>
             <HomepageContent />
         </div>
     );
