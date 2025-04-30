@@ -333,7 +333,6 @@ def remove_from_cart(customer_id, product_id, quantity):
     conn.commit()
 
 # SETUP
-
 add_product("Black", "One Size", 100, "Vital Hoodie", "/hoodie.png")
 add_product("Mauve", "One Size", 100, "Vital Tee", "/shirt.png")
 view_all_products()

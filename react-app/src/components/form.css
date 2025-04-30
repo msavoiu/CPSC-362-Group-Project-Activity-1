@@ -1,0 +1,11 @@
+.user-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 20rem;
+}
+
+.form-div {
+    display: flex;
+    justify-content: center;
+}
