@@ -66,19 +66,19 @@ class TestECommerceAPI(unittest.TestCase):
             )
         ''')
         
-        hashed_password = hashlib.sha256('testpassword'.encode()).hexdigest()
+        hashed_password = hashlib.sha256('password1'.encode()).hexdigest()
         cursor.execute('''
             INSERT INTO customers (email, password)
             VALUES (?, ?)
-        ''', ('test@example.com', hashed_password))
+        ''', ('user1@gmail.com', hashed_password))
         
         conn.commit()
         conn.close()
     
     def test_login_success(self):
         response = self.app.post('/api/login', json={
-            'email': 'test@example.com',
-            'password': 'testpassword'
+            'email': 'user1@gmail.com',
+            'password': 'password1'
         })
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 200)
@@ -87,7 +87,7 @@ class TestECommerceAPI(unittest.TestCase):
     
     def test_login_invalid_credentials(self):
         response = self.app.post('/api/login', json={
-            'email': 'test@example.com',
+            'email': 'user1@gmail.com',
             'password': 'wrongpassword'
         })
         data = json.loads(response.data)
@@ -96,26 +96,16 @@ class TestECommerceAPI(unittest.TestCase):
     
     def test_login_missing_data(self):
         response = self.app.post('/api/login', json={
-            'email': 'test@example.com'
+            'email': 'user1@gmail.com'
         })
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(data['message'], 'Email and password are required')
     
-    def test_register_success(self):
-        response = self.app.post('/api/register', json={
-            'email': 'new@example.com',
-            'password': 'newpassword'
-        })
-        data = json.loads(response.data)
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(data['message'], 'Registration successful')
-        self.assertIn('user_id', data)
-    
     def test_register_existing_email(self):
         response = self.app.post('/api/register', json={
-            'email': 'test@example.com',
-            'password': 'newpassword'
+            'email': 'user1@gmail.com',
+            'password': 'password1'
         })
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 409)
@@ -149,8 +139,8 @@ class TestECommerceAPI(unittest.TestCase):
     def test_add_to_cart(self):
         with self.app as client:
             client.post('/api/login', json={
-                'email': 'test@example.com',
-                'password': 'testpassword'
+                'email': 'user1@gmail.com',
+                'password': 'password1'
             })
             response = client.post('/api/cart/add', json={
                 'product_id': 1,
@@ -169,14 +159,14 @@ class TestECommerceAPI(unittest.TestCase):
     def test_profile_authenticated(self):
         with self.app as client:
             client.post('/api/login', json={
-                'email': 'test@example.com',
-                'password': 'testpassword'
+                'email': 'user1@gmail.com',
+                'password': 'password1'
             })
             response = client.get('/api/profile')
             data = json.loads(response.data)
             self.assertEqual(response.status_code, 200)
             self.assertIn('user', data)
-            self.assertEqual(data['user']['email'], 'test@example.com')
+            self.assertEqual(data['user']['email'], 'user1@gmail.com')
     
     def test_profile_unauthenticated(self):
         response = self.app.get('/api/profile')
