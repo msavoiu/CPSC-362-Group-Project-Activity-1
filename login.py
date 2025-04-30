@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime
 from collections import Counter
-from Database import *
+from database import *
 import hashlib
 
 conn = sqlite3.connect('database.db')
@@ -65,4 +65,3 @@ def Customer_register(email, password):
 #view_all_customers()
 #Customer_register("two", "one")
 #Customer_login("landon@gmail.com", "landonpassword")
-
